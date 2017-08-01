@@ -3,10 +3,9 @@ import React, { Component } from 'react';
 class Graph extends React.Component {
     render() {
         return (
-            <svg width={this.props.width} height={this.props.height}>
-                <circle cx="25" cy="25" r="25" />
-                <circle cx="45" cy="25" r="25" />
-                <circle cx="25" cy="25" r="25" />
+            <svg width="150" height="150">
+                <circle cx="50" cy="50" r={this.props.radius} />
+                <text x="50" textAnchor="middle" y="110">{this.props.name}</text>
             </svg>
         )
     }
@@ -15,11 +14,33 @@ class Graph extends React.Component {
 class PlanetsView extends Component {
     constructor(props) {
         super(props);
+
+        this.getPlanetsView = this.getPlanetsView.bind(this);
     }
 
     getPlanetsView() {
+        var {planets} = this.props;
+
+        var biggestPlanet = planets.reduce((a,b)=> {
+            var pol = b.population * 1;
+            return !isNaN(pol) && pol > a.population ? b : a;
+        }, {population:0})
+        
+        var biggestPopulation = biggestPlanet.name ? biggestPlanet.population : 0;
+
+        var planetSets = planets.map(a => {
+            var pol = a.population * 1;
+            var radius = biggestPopulation && !isNaN(pol) ? (pol/biggestPopulation * 50) : 25;
+            return {
+                name: a.name,
+                radius
+            }
+        })
+
         return (
-            <Graph height="600" width="800" />
+            <div>
+                {planetSets.map((a, i) => <Graph key={"planet-"+ (i + 1)} {...a} />)}
+            </div>
         );
     }
 
@@ -27,9 +48,6 @@ class PlanetsView extends Component {
         return (
             <div className="planets-view">
                 {this.getPlanetsView()}
-                <ul>
-                    {this.props.planets.map((planet, i) => <li key={"planet-" + (i + 1)}>{planet.name}</li>)}
-                </ul>
             </div>
         );
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Form, FormGroup, FormControl } from 'react-bootstrap';
 
 class SearchPage extends Component {
     constructor(props) {

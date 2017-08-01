@@ -36,7 +36,7 @@ class LoginPage extends Component {
 
         if (data.count > 0) {
             user = data.results.find(a =>
-                a.name == this.state.username && a.birth_year == this.state.password
+                a.name === this.state.username && a.birth_year === this.state.password
             );
 
             if (!user) {
