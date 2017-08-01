@@ -79,6 +79,7 @@ class LoginPage extends Component {
     render() {
         return (
             <div className="login">
+                <h1>SWPlanets</h1>
                 <form onSubmit={!this.state.isLoading && this.handleSubmit}>
                     { this.state.hasError && <Alert bsStyle="danger">
                         <strong>Err!</strong> Enter correct details and try again
