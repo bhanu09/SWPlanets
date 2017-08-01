@@ -1,0 +1,1 @@
+This project allows the user to login with Star Wars character name and Birth Year. The user can then browse the planets.
